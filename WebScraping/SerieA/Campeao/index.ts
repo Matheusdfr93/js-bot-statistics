@@ -1,4 +1,5 @@
 import puppeteer, { Browser } from "puppeteer";
+import { Request, Response } from "express";
 
 function champSerieA() {
   const findProbsUfmg = async () => {
@@ -57,22 +58,27 @@ function champSerieA() {
     }
   };
 
-  const getProbsByTeam = async (params) => {
+  const getProbsByTeam = async (req: Request, res: Response) => {
     try {
-      const { team }: { team: string } = params;
+      const { team }: { team: string } = req.body;
+      if (!team)
+        return res
+          .send({ status: "failed", message: "Missing data parameter" })
+          .status(400);
       const prob: String[] = await makeArrayofTeamsAndProbs();
-      console.log("TIMA", team);
+      console.log("TIMA", team.toUpperCase());
       const champ: String[] = prob.filter((el: any) => {
-        if (el.time === team) {
+        if (el.time === team.toUpperCase()) {
           //console.log(el);
           return el;
         }
       });
-      console.log("Olha essa merda", champ);
       const a = champ[0];
-      return a;
+      console.log("Olha essa merda", a);
+      return res.json(a).status(200);
     } catch (e) {
       console.log(e);
+      return res.sendStatus(500);
     }
   };
   return { getProbsByTeam };
