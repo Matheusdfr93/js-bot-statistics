@@ -1,5 +1,5 @@
 import puppeteer, { Browser } from "puppeteer";
-import { Request, Response } from "express";
+//import { Request, Response } from "express";
 
 function champSerieA() {
   const findProbsUfmg = async () => {
@@ -58,13 +58,13 @@ function champSerieA() {
     }
   };
 
-  const getProbsByTeam = async (req: Request, res: Response) => {
+  const getProbsByTeam = async (team) => {
     try {
-      const { team }: { team: string } = req.body;
-      if (!team)
-        return res
-          .send({ status: "failed", message: "Missing data parameter" })
-          .status(400);
+      // const { team }: { team: string } = req.body;
+      // if (!team)
+      // return res
+      // .send({ status: "failed", message: "Missing data parameter" })
+      // .status(400);
       const prob: String[] = await makeArrayofTeamsAndProbs();
       const champ: String[] = prob.filter((el: any) => {
         if (el.time === team.toUpperCase()) {
@@ -74,10 +74,10 @@ function champSerieA() {
       });
       const a = champ[0];
       console.log("Olha essa merda", a);
-      return res.json(a).status(200);
+      return a;
     } catch (e) {
       console.log(e);
-      return res.sendStatus(500);
+      return e;
     }
   };
   return { getProbsByTeam };
