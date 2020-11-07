@@ -7,7 +7,7 @@ function createRouter() {
 
   function registerRoutes() {
     router.get("/", (req, res) => {
-      res.send({ status: "ok" }).status(200);
+      res.send({ status: "abroba" }).status(200);
     });
     router.post("/probChamp", champController.getProbsByTeam);
   }

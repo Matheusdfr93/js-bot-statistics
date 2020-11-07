@@ -21,6 +21,7 @@ function champSerieA() {
         });
         const conteudo = [...deda];
         await browser.close();
+        console.log("Cibeeee", conteudo);
         return Array.from(conteudo);
       });
       const arrayData: String[][] = await Promise.all(result);
@@ -37,7 +38,6 @@ function champSerieA() {
       const prob = [];
       const arrayData = await findProbsUfmg();
       let probi = 0;
-
       arrayData[0].map((el, i) => {
         if (i % 3 === 0) {
           prob[probi] = { posicao: "", time: "", prob: "" };
@@ -66,7 +66,6 @@ function champSerieA() {
           .send({ status: "failed", message: "Missing data parameter" })
           .status(400);
       const prob: String[] = await makeArrayofTeamsAndProbs();
-      console.log("TIMA", team.toUpperCase());
       const champ: String[] = prob.filter((el: any) => {
         if (el.time === team.toUpperCase()) {
           //console.log(el);
