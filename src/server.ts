@@ -1,3 +1,10 @@
-const a: number = 5;
+import createApp from "./app";
 
-console.log(a);
+const app = createApp();
+const PORT = process.env.PORT || 5555;
+
+app.init();
+
+app.express.listen(PORT, () => {
+  console.log(`listen on PORT: `, PORT);
+});
