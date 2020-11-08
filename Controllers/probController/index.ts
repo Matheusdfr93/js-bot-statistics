@@ -3,6 +3,7 @@ import champSerieA from "../../WebScraping/SerieA/Campeao";
 import libertSerieA from "../../WebScraping/SerieA/Libertadores";
 import rebaixamentoSerieA from "../../WebScraping/SerieA/Rebaixamento";
 import champSerieB from "../../WebScraping/SerieB/Campeao";
+import classificacaoParaSerieA from "../../WebScraping/SerieB/classificacaoSerieA";
 
 const probController = {
   async probActions(req: Request, res: Response, next) {
@@ -35,11 +36,15 @@ const probController = {
           };
         }
         const probChamp = await champSerieB.getProbsByTeam(team);
+        const probCLassificacaoSerieA = await classificacaoParaSerieA.getProbsByTeam(
+          team
+        );
         return {
           valid: true,
           time: probChamp.time,
           probabilidades: {
             campeao: probChamp.prob,
+            classificacoSerieA: probCLassificacaoSerieA.prob,
           },
         };
       },
