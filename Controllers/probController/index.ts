@@ -5,8 +5,9 @@ import rebaixamentoSerieA from "../../WebScraping/SerieA/Rebaixamento";
 import champSerieB from "../../WebScraping/SerieB/Campeao";
 import classificacaoParaSerieA from "../../WebScraping/SerieB/classificacaoSerieA";
 import rebaixamentoSerieB from "../../WebScraping/SerieB/rebaixamentoSerieC";
-import champSerieAClubeAposta from "../../WebScraping/ClubeDaAposta";
+import champSerieAClubeAposta from "../../WebScraping/ClubeDaAposta/SerieA";
 import listTeams from "../utils/teams";
+import champSerieAChanceDeGol from "../../WebScraping/chanceDeGol/SerieA";
 
 const probController = {
   async probActions(req: Request, res: Response, next) {
@@ -87,6 +88,10 @@ const probController = {
             valid: false,
           };
         }
+        const prob = await champSerieAChanceDeGol.getProbsByTeam(team);
+        return {
+          prob,
+        };
       },
     };
 
