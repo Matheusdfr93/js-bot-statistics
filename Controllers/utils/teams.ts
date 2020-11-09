@@ -30,7 +30,7 @@ const listTeams = {
     mask: "Botafogo 🔥",
   },
   7: {
-    nome: "Ceará ",
+    nome: "Ceará",
     nomeCda: "Ceará",
     mask: "Ceará 👴🏻",
   },

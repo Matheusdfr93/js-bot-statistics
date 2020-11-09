@@ -10,7 +10,6 @@ function classificacaoParaSerieA() {
       );
       await page.waitForXPath(`//*[@id="tabelaCL"]/tbody`);
       const elHandle = await page.$x(`//*[@id="tabelaCL"]/tbody`);
-
       const result = elHandle.map(async (el) => {
         const deda = await el.evaluate(() => {
           const x = document.getElementsByTagName("td");

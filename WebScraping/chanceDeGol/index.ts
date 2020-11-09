@@ -5,11 +5,15 @@ async function interneta() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   try {
-    await page.goto("http://www.mat.ufmg.br/futebol/campeao_seriea/");
+    await page.goto("https://www.chancedegol.com.br/br20.htm");
 
-    await page.waitForXPath(`//*[@id="tabelaCL"]/tbody`);
+    await page.waitForXPath(
+      `/html/body/p[1]/font/table[2]/tbody/tr/td[3]/font/table/tbody`
+    );
 
-    const elHandle = await page.$x(`//*[@id="tabelaCL"]/tbody`);
+    const elHandle = await page.$x(
+      `/html/body/p[1]/font/table[2]/tbody/tr/td[3]/font/table/tbody`
+    );
 
     const result = elHandle.map(async (el) => {
       const deda = await el.evaluate(() => {

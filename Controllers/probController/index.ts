@@ -80,6 +80,14 @@ const probController = {
           },
         };
       },
+      findProbByTeamChanceDeGolSerieA: async (params) => {
+        const { team } = params;
+        if (!team) {
+          return {
+            valid: false,
+          };
+        }
+      },
     };
 
     const { action } = req.body;
