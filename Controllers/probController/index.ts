@@ -5,6 +5,8 @@ import rebaixamentoSerieA from "../../WebScraping/SerieA/Rebaixamento";
 import champSerieB from "../../WebScraping/SerieB/Campeao";
 import classificacaoParaSerieA from "../../WebScraping/SerieB/classificacaoSerieA";
 import rebaixamentoSerieB from "../../WebScraping/SerieB/rebaixamentoSerieC";
+import champSerieAClubeAposta from "../../WebScraping/ClubeDaAposta";
+import listTeams from "../utils/teams";
 
 const probController = {
   async probActions(req: Request, res: Response, next) {
@@ -49,6 +51,32 @@ const probController = {
             campeao: probChamp.prob,
             classificacoSerieA: probCLassificacaoSerieA.prob,
             rebaixamento: probRebaixC.prob,
+          },
+        };
+      },
+
+      findProbByTeamClubeDaApostaSerieA: async (params) => {
+        const { team } = params;
+        if (!team) {
+          return {
+            valid: false,
+          };
+        }
+        const listTeams2 = Object.values(listTeams);
+        const time = listTeams2.filter((el) => {
+          if (el.nome === team) return el.nomeCda;
+        });
+        const prob = await champSerieAClubeAposta.getProbsByTeam(
+          time[0].nomeCda
+        );
+        return {
+          valid: true,
+          time: prob.time,
+          probabilidades: {
+            campeao: prob.probCamp,
+            libertadores: prob.probLibert,
+            sulamericana: prob.probSula,
+            rebaixamento: prob.probRebaixamento,
           },
         };
       },
