@@ -112,3 +112,26 @@ const a = listTeams3.filter((el) => {
   }
 });
 console.log(a[0]);
+
+function run(site) {
+  const sites = [
+    {
+      nome: "Estatísticas UFMG",
+      action: "findProbByTeamSerieA",
+    },
+    {
+      nome: "Clube da Aposta",
+      action: "findProbByTeamClubeDaApostaSerieA",
+    },
+  ];
+  const action = sites.filter((el) => {
+    if (el.nome === site) {
+      return el;
+    }
+  });
+  action = JSON.stringify(action[0]);
+  if (!action) {
+    action = null;
+  }
+  return action; //Return value will be saved as "Return value variable" field name
+}
