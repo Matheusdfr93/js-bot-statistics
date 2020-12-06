@@ -1,15 +1,19 @@
 import puppeteer, { Browser } from "puppeteer";
+//import { Request, Response } from "express";
 
-function classificacaoParaSerieA() {
+function champSerieAChanceDeGol() {
   const findProbsUfmg = async () => {
     const browser: Browser = await puppeteer.launch();
     const page: puppeteer.Page = await browser.newPage();
     try {
-      await page.goto(
-        "http://www.mat.ufmg.br/futebol/classificacao-para-primeira-divisao/"
+      await page.goto("https://www.chancedegol.com.br/br20.htm");
+      await page.waitForXPath(
+        `/html/body/p[1]/font/table[2]/tbody/tr/td[3]/font/table/tbody`
       );
-      await page.waitForXPath(`//*[@id="tabelaCL"]/tbody`);
-      const elHandle = await page.$x(`//*[@id="tabelaCL"]/tbody`);
+      const elHandle = await page.$x(
+        `/html/body/p[1]/font/table[2]/tbody/tr/td[3]/font/table/tbody`
+      );
+
       const result = elHandle.map(async (el) => {
         const deda = await el.evaluate(() => {
           const x = document.getElementsByTagName("td");
@@ -21,6 +25,7 @@ function classificacaoParaSerieA() {
         });
         const conteudo = [...deda];
         await browser.close();
+        console.log("Cibeeee", conteudo);
         return Array.from(conteudo);
       });
       const arrayData: String[][] = await Promise.all(result);
@@ -36,21 +41,40 @@ function classificacaoParaSerieA() {
     try {
       const prob = [];
       const arrayData = await findProbsUfmg();
+      //console.log(arrayData);
       let probi = 0;
       arrayData[0].map((el, i) => {
-        if (i % 3 === 0) {
-          prob[probi] = { posicao: "", time: "", prob: "" };
+        if (i % 15 === 0) {
+          console.log("aqui");
+          prob[probi] = {
+            posicao: "",
+            time: "",
+            probCamp: "",
+            probLibert: "",
+            probSula: "",
+            probRebaixamento: "",
+          };
           prob[probi].posicao = el.toString();
         }
 
-        if ((i - 1) % 3 === 0) {
+        if ((i - 1) % 10 === 0) {
           prob[probi].time = el.toString();
         }
-        if ((i - 2) % 3 === 0) {
-          prob[probi].prob = el.toString();
+        if ((i - 11) % 10 === 0) {
+          prob[probi].probCamp = el.toString();
+        }
+        if ((i - 12) % 10 === 0) {
+          prob[probi].probLibert = el.toString();
+        }
+        if ((i - 13) % 10 === 0) {
+          prob[probi].probSula = el.toString();
+        }
+        if ((i - 14) % 10 === 0) {
+          prob[probi].probRebaixamento = el.toString();
           probi = probi + 1;
         }
       });
+      console.log("ATENÇÃO!!! ", prob);
       return prob;
     } catch (e) {
       console.log(e);
@@ -61,11 +85,13 @@ function classificacaoParaSerieA() {
     try {
       const prob: String[] = await makeArrayofTeamsAndProbs();
       const champ: String[] = prob.filter((el: any) => {
-        if (el.time === team.toUpperCase()) {
+        if (el.time.toUpperCase() === team.toUpperCase()) {
+          //console.log(el);
           return el;
         }
       });
       const a = champ[0];
+      console.log("Olha essa merda", a);
       return a;
     } catch (e) {
       console.log(e);
@@ -75,4 +101,4 @@ function classificacaoParaSerieA() {
   return { getProbsByTeam };
 }
 
-export default classificacaoParaSerieA();
+export default champSerieAChanceDeGol();

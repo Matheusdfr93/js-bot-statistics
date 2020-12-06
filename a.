@@ -1,4 +1,0 @@
-As chances do {{prob@response.time}}:
-Campeão 🏆: {{prob@response.probabilidades.campeao}}%
-Acesso 🅰️: {{prob@response.probabilidades.classificacoSerieA}}%
-Rebaixamento 3️⃣: {{prob@response.probabilidades.rebaixamento}}%
