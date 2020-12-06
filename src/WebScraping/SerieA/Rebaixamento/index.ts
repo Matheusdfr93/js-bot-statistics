@@ -3,7 +3,7 @@ import puppeteer, { Browser } from "puppeteer";
 function rebaixamentoSerieA() {
   const findProbsUfmg = async () => {
     const browser: Browser = await puppeteer.launch({
-      args: ["--no-sandbox"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page: puppeteer.Page = await browser.newPage();
     try {

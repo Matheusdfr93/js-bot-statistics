@@ -3,7 +3,7 @@ import puppeteer, { Browser } from "puppeteer";
 function libertSerieA() {
   const findProbsUfmg = async () => {
     const browser = await puppeteer.launch({
-      args: ["--no-sandbox"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page: puppeteer.Page = await browser.newPage();
     try {
