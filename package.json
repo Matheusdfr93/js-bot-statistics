@@ -5,8 +5,12 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "start": "node ./dist/server.js",
+    "start": "node dist/server.js",
+    "build2": "npx typescript --project tsconfig.json",
     "build": "babel src --extensions \" .js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
+  },
+  "engines": {
+    "node": "12.x.x"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +35,7 @@
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
+    "babel-plugin-module-resolver": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
     "eslint": "^7.12.0",
     "eslint-config-airbnb-base": "^14.2.0",

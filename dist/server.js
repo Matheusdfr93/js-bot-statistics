@@ -1,12 +1,12 @@
 "use strict";
-
-var _app = _interopRequireDefault(require("./app"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var app = (0, _app["default"])();
-var PORT = process.env.PORT || 5555;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = __importDefault(require("./app"));
+const app = app_1.default();
+const PORT = process.env.PORT || 5555;
 app.init();
-app.express.listen(PORT, function () {
-  console.log("listen on PORT: ", PORT);
+app.express.listen(PORT, () => {
+    console.log(`listen on PORT: `, PORT);
 });

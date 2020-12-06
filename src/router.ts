@@ -1,6 +1,6 @@
 import { Router } from "express";
-import champSerieA from "../WebScraping/SerieA/Campeao";
-import probController from "../Controllers/probController";
+import champSerieA from "./WebScraping/SerieA/Campeao";
+import probController from "./Controllers/probController";
 
 function createRouter() {
   const router = Router();
