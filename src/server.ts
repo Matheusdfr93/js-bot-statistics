@@ -1,7 +1,7 @@
 import createApp from "./app";
 
 const app = createApp();
-const PORT = process.env.PORT || 5555;
+const PORT = process.env.PORT || 5556;
 
 app.init();
 
