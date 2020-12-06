@@ -84,7 +84,6 @@ const probController = {
         },
         findProbByTeamChanceDeGolSerieA: async (params) => {
           const { team } = params;
-          console.log("Chegou:", team);
           if (!team) {
             return {
               valid: false,
