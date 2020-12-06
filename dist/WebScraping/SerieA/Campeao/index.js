@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function champSerieA() {
   const findProbsUfmg = async () => {
     const browser = await _puppeteer.default.launch({
-      args: ["--no-sandbox"]
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
 
