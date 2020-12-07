@@ -58,18 +58,20 @@ const probController = {
         },
 
         findProbByTeamClubeDaApostaSerieA: async (params) => {
-          const { team } = params;
+          const { team }: { team: string } = params;
           if (!team) {
             return {
               valid: false,
             };
           }
+          console.log("time: ", team);
           const listTeams2 = Object.values(listTeams);
-          const time = listTeams2.filter((el) => {
-            if (el.nome === team) return el.nomeCda;
+          const time = listTeams2.find((el) => {
+            return el.nome.toUpperCase() === team.toUpperCase();
           });
+          console.log("achou o que:?", time);
           const prob = await champSerieAClubeAposta.getProbsByTeam(
-            time[0].nomeCda
+            time.nomeCda
           );
           return {
             valid: true,

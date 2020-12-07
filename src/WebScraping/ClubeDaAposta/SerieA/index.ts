@@ -12,10 +12,10 @@ function champSerieAClubeAposta() {
         "https://clubedaposta.com/probabilidade-titulo-classificacao/chances-titulo-libertadores-brasileirao-serie-a-2020-2021/"
       );
       await page.waitForXPath(
-        `//*[@id="post-143174"]/div/div[2]/div[1]/table/tbody`
+        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]`
       );
       const elHandle = await page.$x(
-        `//*[@id="post-143174"]/div/div[2]/div[1]/table/tbody`
+        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]`
       );
 
       const result = elHandle.map(async (el) => {
@@ -45,7 +45,7 @@ function champSerieAClubeAposta() {
     try {
       const prob = [];
       const arrayData = await findProbsUfmg();
-      //console.log(arrayData);
+      console.log(arrayData);
       let probi = 0;
       arrayData[0].map((el, i) => {
         if (i % 10 === 0) {
