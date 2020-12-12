@@ -12,10 +12,10 @@ function champSerieAClubeAposta() {
         "https://clubedaposta.com/probabilidade-titulo-classificacao/chances-titulo-libertadores-brasileirao-serie-a-2020-2021/"
       );
       await page.waitForXPath(
-        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]`
+        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]/table`
       );
       const elHandle = await page.$x(
-        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]`
+        `/html/body/div[1]/div/div/section/div[2]/div/main/div/article/div/div[2]/div[2]/table`
       );
 
       const result = elHandle.map(async (el) => {
@@ -78,7 +78,6 @@ function champSerieAClubeAposta() {
           probi = probi + 1;
         }
       });
-      console.log("ATENÇÃO!!! ", prob);
       return prob;
     } catch (e) {
       console.log(e);
